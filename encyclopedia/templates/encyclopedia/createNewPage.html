@@ -1,0 +1,36 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+Encyclopedia
+{% endblock %}
+
+{% block body %}
+<h1>Create a New Page</h1>
+<div class = "container">
+
+<form action = "{% url 'createNewPage'%}" method = "POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="title"><h4>Title</h4></label>
+        <textarea class="form-control " name = "title" id="title" placeholder="Title of the content" required></textarea>
+        
+    </div>
+    <div class="mb-3">
+        <label for="content"><h4>Content</h4></label>
+        <textarea class="form-control " name = "content" id="content" placeholder="Write the content here" required></textarea>
+        
+    </div>
+ 
+    <input  class="btn btn-primary" type="submit" value="Submit">
+    
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+</form>
+</div>
+{% endblock %}
